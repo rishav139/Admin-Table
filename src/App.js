@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from "react";
-import { Table } from 'reactstrap';
-import ReactPaginate from "react-paginate";
 import './App.css';
+import Header from './Components/Header.js';
+import TableData from './Components/TableData.js';
+import  Pagination from './Components/Pagination.js';
 
 function App() {
 
@@ -31,48 +32,9 @@ function App() {
 
   return (
       <>
-        <h1> Admin Table </h1>
-        <Table striped responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Role</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              posts.slice(pagesVisited, pagesVisited + postsPerPage).map((post, idx) => (
-                <tr>
-                  <th>{pagesVisited+idx+1}</th>
-                  <td>{post.id}</td>
-                  <td>{post.name}</td>
-                  <td>{post.email}</td>
-                  <td>{post.role}</td>
-                </tr>
-              ))
-              
-            }
-          </tbody>
-        </Table>
-        
-        <ReactPaginate
-          previousLabel={" < "}
-          nextLabel={" > "}
-          breakLabel={"..."}
-          pageCount={pageCount}
-          marginPagesDisplayed={1}
-          pageRangeDisplayed={1}
-          onPageChange={changePage}
-          containerClassName={"paginationBttns"}
-          previousLinkClassName={"previousBttn"}
-          nextLinkClassName={"nextBttn"}
-          disabledClassName={"paginationDisabled"}
-          activeClassName={"paginationActive"}
-        />
-        
+        <Header />
+        <TableData posts={posts} pagesVisited={pagesVisited} postsPerPage={postsPerPage} />
+        <Pagination changePage={changePage} pageCount={pageCount} /> 
       </>
   );
 }
